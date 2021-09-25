@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateQuickLinksTable extends Migration
+class AddColumnAboutToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateQuickLinksTable extends Migration
      */
     public function up()
     {
-        Schema::create('course_user', function (Blueprint $table) {
-            $table->id();
-            $table->integer('course_id')->nullable();
-            $table->integer('user_id')->nullable();
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->text('about');
         });
     }
 
@@ -28,6 +25,8 @@ class CreateQuickLinksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('quick_links');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('about');
+        });
     }
 }

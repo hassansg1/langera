@@ -117,7 +117,21 @@ if (!function_exists('loggedInUserId')) {
 
     }
 }
+function currentUser()
+{
+    return \Illuminate\Support\Facades\Auth::user();
+
+}
 function getUserCourses()
 {
     return \Illuminate\Support\Facades\Auth::user()->courses;
+}
+
+function getConversation($from,$to){
+   $chat = \App\Models\Conversations::with('userTo','userFrom')->where('group_id', '=',null)->where(['from'=>$from , 'to'=>$to])->orWhere(['from'=>$to , 'to'=>$from])->get();
+    return \Illuminate\Support\Facades\View::make('chat.chatModel.chat')->with(['chat'=>$chat,'to'=>$to])->render();
+}
+function getGroupMessages($groupId){
+   $chat = \App\Models\Conversations::with('userFrom')->where('group_id', '=',$groupId)->get();
+    return \Illuminate\Support\Facades\View::make('chat.chatModel.groupChat')->with(['chat'=>$chat])->render();
 }

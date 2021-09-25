@@ -37,6 +37,11 @@ Route::group(['middleware' => ['auth']], function () {
         'chat' => \App\Http\Controllers\ChatController::class,
     ]);
 
+    Route::post('chat/data', [\App\Http\Controllers\ChatController::class, 'chatData'])->name('chat.chatData');
+    Route::post('group/create', [\App\Http\Controllers\ChatController::class, 'createGroup'])->name('create.group');
+    Route::post('add/group/messages', [\App\Http\Controllers\ChatController::class, 'addGroupMessages'])->name('add.group.messages');
+    Route::post('group/messages', [\App\Http\Controllers\ChatController::class, 'groupMessages'])->name('group.messages');
+
     Route::get('article/createNew/{courseId}', [\App\Http\Controllers\ArticleController::class, 'createNew'])->name('article.createNew');
     Route::post('add_to_article', [\App\Http\Controllers\IdeaController::class, 'addToArticle'])->name('idea.add_to_article');
     Route::post('add_source_to_article', [\App\Http\Controllers\SourceController::class, 'addToArticle'])->name('source.add_to_article');
@@ -48,5 +53,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('saveWriting', [\App\Http\Controllers\AjaxController::class, 'saveWriting']);
     Route::post('pdfOutlining', [\App\Http\Controllers\AjaxController::class, 'pdfOutlining']);
     Route::post('pdfWriting', [\App\Http\Controllers\AjaxController::class, 'pdfWriting']);
+
 
 });

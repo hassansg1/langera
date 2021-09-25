@@ -41,7 +41,7 @@
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
                     <!-- item-->
-                    <a class="dropdown-item" href="contacts-profile"><i class="bx bx-user font-size-16 align-middle me-1"></i> <span key="t-profile">@lang('translation.Profile')</span></a>
+                    <a class="dropdown-item d-block" href="#" data-bs-toggle="modal" data-bs-target=".update-profile"><i class="bx bx-user font-size-16 align-middle me-1"></i> <span key="t-profile">@lang('translation.Profile')</span></a>
                     <a class="dropdown-item d-block" href="#" data-bs-toggle="modal" data-bs-target=".change-password"><i class="bx bx-wrench font-size-16 align-middle me-1"></i> <span key="t-settings">@lang('translation.Settings')</span></a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item text-danger" href="javascript:void();" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span key="t-logout">@lang('translation.Logout')</span></a>
@@ -64,11 +64,11 @@
                         aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="POST" id="change-password">
+                <form method="post" id="change-password"  action="{{route('updatePassword',[loggedInUserId()])}}">
                     @csrf
                     <input type="hidden" value="{{ Auth::user()->id }}" id="data_id">
                     <div class="mb-3">
-                        <label for="current_password">Current Password</label>
+                        <label for="current_password">Current Password </label>
                         <input id="current-password" type="password"
                                class="form-control @error('current_password') is-invalid @enderror"
                                name="current_password" autocomplete="current_password"
@@ -94,6 +94,66 @@
                     <div class="mt-3 d-grid">
                         <button class="btn btn-primary waves-effect waves-light UpdatePassword" data-id="{{ Auth::user()->id }}"
                                 type="submit">Update Password</button>
+                    </div>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+<div class="modal fade update-profile" tabindex="-1" role="dialog"
+     aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myLargeModalLabel">Update Profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="change-password"  action="{{route('updateProfile',[loggedInUserId()])}}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="current_password">First name </label>
+                        <input id="first_name" type="text"
+                               class="form-control @error('first_name') is-invalid @enderror"
+                               name="first_name"
+                               required value="{{ currentUser()->first_name }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="current_password">Last Name </label>
+                        <input id="first_name" type="text"
+                               class="form-control @error('last_name') is-invalid @enderror"
+                               name="last_name"
+                                required value="{{ currentUser()->last_name }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="current_password">Email </label>
+                        <input id="email" type="email"
+                               class="form-control @error('last_name') is-invalid @enderror"
+                               name="email"
+                                required value="{{ currentUser()->email }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="current_password">About </label>
+                        <input id="about" type="text"
+                               class="form-control @error('about') is-invalid @enderror"
+                               name="about"
+                               required value="{{ currentUser()->about }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="current_password">Profile Picture </label>
+                        <input id="avatar" type="file"
+                               class="form-control @error('avatar') is-invalid @enderror"
+                               name="avatar"
+                                value="{{ currentUser()->avatar }}">
+                    </div>
+
+                    <div class="mt-3 d-grid">
+                        <button class="btn btn-primary waves-effect waves-light UpdatePassword" data-id="{{ Auth::user()->id }}"
+                                type="submit">Update Profile</button>
                     </div>
                 </form>
             </div>

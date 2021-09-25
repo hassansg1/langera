@@ -15,13 +15,13 @@
                             <div class="col-md-3">
                                 <div class="mt-3">
                                     <h4 class="">{{ Str::ucfirst(Auth::user()->name) }}</h4>
-                                    <p class="text-muted font-size-15 mb-0 ">Vancouver, BC</p>
+{{--                                    <p class="text-muted font-size-15 mb-0 ">Vancouver, BC</p>--}}
                                 </div>
                             </div>
                             <div class="col-md-5">
                                 <div class="mt-3">
                                     <p class="text-muted font-size-15 mb-0 ">About me</p>
-                                    <h4 class="">I love history and document filmmaking.</h4>
+                                    <h4 class="">{{ currentUser()->about }}</h4>
                                 </div>
                             </div>
                         </div>
