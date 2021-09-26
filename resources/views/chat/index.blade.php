@@ -605,6 +605,7 @@ function getData(){
                 'class="mdi mdi-send"></i></button>'
             $('#submitButton').html(buttonData);
             $('#chatData').show();
+
             $('#toUserName').html(groupName);
 
             $(`#removeStyleG${$('#groupId').val()} a`).css('background-color', '');
