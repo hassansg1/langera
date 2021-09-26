@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Conversations;
+use App\Models\GroupUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 if (!function_exists('getLang')) {
@@ -128,10 +131,24 @@ function getUserCourses()
 }
 
 function getConversation($from,$to){
-   $chat = \App\Models\Conversations::with('userTo','userFrom')->where('group_id', '=',null)->where(['from'=>$from , 'to'=>$to])->orWhere(['from'=>$to , 'to'=>$from])->get();
-    return \Illuminate\Support\Facades\View::make('chat.chatModel.chat')->with(['chat'=>$chat,'to'=>$to])->render();
+   $chat = \App\Models\Conversations::with('userTo','userFrom')->whereNull('group_id')->where(['from'=>$from , 'to'=>$to])
+       ->orWhere(function ($query) use($from,$to){
+           $query->where(['from'=>$to , 'to'=>$from]);
+       })->get();
+   return \Illuminate\Support\Facades\View::make('chat.chatModel.chat')->with(['chat'=>$chat,'to'=>$to])->render();
 }
 function getGroupMessages($groupId){
    $chat = \App\Models\Conversations::with('userFrom')->where('group_id', '=',$groupId)->get();
     return \Illuminate\Support\Facades\View::make('chat.chatModel.groupChat')->with(['chat'=>$chat])->render();
+}
+function userChat (){
+
+    $chats =  Conversations::with('userFrom','userTo')->where('group_id', '=',null)->where('from',Auth::id())->orWhere('to',Auth::id())
+        ->groupBy(['from','to'])->get();
+    return \Illuminate\Support\Facades\View::make('chat.chatModel.chatUser')->with(['chats'=>$chats])->render();
+
+}
+function chatGroups(){
+    $groups = GroupUsers::with('group')->where('user_id',Auth::id())->groupBy('group_id')->get();
+    return $groups;
 }

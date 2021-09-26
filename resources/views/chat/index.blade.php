@@ -63,13 +63,13 @@
                     <div class="chat-leftsidebar-nav">
                         <ul class="nav nav-pills nav-justified">
                             <li class="nav-item">
-                                <a href="#chat" data-bs-toggle="tab" aria-expanded="true" class="nav-link active">
+                                <a href="#chat" data-bs-toggle="tab" aria-expanded="true"  onclick="setConverSations('c')"  class="nav-link active">
                                     <i class="bx bx-chat font-size-20 d-sm-none"></i>
                                     <span class="d-none d-sm-block">Chat</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#groups" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
+                                <a href="#groups" data-bs-toggle="tab" aria-expanded="false" onclick="setConverSations('g')" class="nav-link">
                                     <i class="bx bx-group font-size-20 d-sm-none"></i>
                                     <span class="d-none d-sm-block">Groups</span>
                                 </a>
@@ -94,50 +94,51 @@
                                             <div class="simplebar-mask">
                                                 <div class="simplebar-offset" style="right: -16.8px; bottom: 0px;">
                                                     <div class="simplebar-content-wrapper"
-                                                         style="height: auto; overflow: hidden scroll;">
-                                                        <div class="simplebar-content" style="padding: 0px;">
-                                                           @if($chats)
-                                                               @php($unique= [])
-                                                           @foreach($chats as $chat)
+                                                         style="height: auto; overflow: hidden scroll;"  id="mainUserDataDiv">
+                                                        <div class="simplebar-content" id="chatUserData" style="padding: 0px;" >
+                                                            @if($chats)
+                                                                @php($unique= [])
+                                                                @foreach($chats as $chat)
                                                                     @if($chat->from != loggedInUserId() )
-                                                                    @php($name = $chat->userFrom->first_name. ' ' .$chat->userFrom->last_name)
+                                                                        @php($name = $chat->userFrom->first_name. ' ' .$chat->userFrom->last_name)
                                                                         @php($avatar = isset($chat->userFrom->avatar)?$chat->userFrom->avatar:asset('/assets/images/users/avatar-1.jpg')  )
                                                                         @php($id = $chat->from)
                                                                     @else
                                                                         @php($name = isset($chat->userTo->first_name)?$chat->userTo->first_name.' ' .$chat->userTo->last_name: '')
                                                                         @php($avatar = isset($chat->userTo->avatar)?$chat->userTo->avatar: asset('/assets/images/users/avatar-1.jpg') )
                                                                         @php($id = $chat->to)
-                                                                      @endif
-                                                                @if(in_array($name,$unique) == false)
-                                                                        <li class="active"  onclick="openInChatBox('{{$id}}','{{$name}}')" >
-                                                                <a href="javascript: void(0);">
-                                                                    <div class="d-flex">
-                                    l                                    <div
-                                                                            class="flex-shrink-0 align-self-center me-3">
-                                                                            <i class="mdi mdi-circle font-size-10"></i>
-                                                                        </div>
-                                                                        <div
-                                                                            class="flex-shrink-0 align-self-center me-3">
-                                                                            <img src="{{$avatar}}"
-                                                                                 class="rounded-circle avatar-xs"
-                                                                                 alt="">
-                                                                        </div>
+                                                                    @endif
+                                                                    @if(in_array($name,$unique) == false)
+                                                                        <li class="active"  id="removeStyle{{$id}}"  onclick="openInChatBox('{{$id}}','{{$name}}')" >
+                                                                            <a  id="addStyle{{$id}}" style="background-color: #f7f9fb" href="javascript: void(0);">
+                                                                                <div class="d-flex">
+                                                                                    l                                    <div
+                                                                                        class="flex-shrink-0 align-self-center me-3">
+                                                                                        <i class="mdi mdi-circle font-size-10"></i>
+                                                                                    </div>
+                                                                                    <div
+                                                                                        class="flex-shrink-0 align-self-center me-3">
+                                                                                        <img src="{{$avatar}}"
+                                                                                             class="rounded-circle avatar-xs"
+                                                                                             alt="">
+                                                                                    </div>
 
-                                                                        <div class="flex-grow-1 overflow-hidden">
-                                                                            <h5 class="text-truncate font-size-14 mb-1">
-                                                                                {{$name}}
-                                                                            </h5>
-                                                                            <p class="text-truncate mb-0">Hey! there I'm
-                                                                                available</p>
-                                                                        </div>
-{{--                                                                        <div class="font-size-11">05 min</div>--}}
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                               @php(array_push($unique, $name))
-                                                                        @endif
+                                                                                    <div class="flex-grow-1 overflow-hidden">
+                                                                                        <h5 class="text-truncate font-size-14 mb-1">
+                                                                                            {{$name}}
+                                                                                        </h5>
+                                                                                        <p class="text-truncate mb-0">Hey! there I'm
+                                                                                            available</p>
+                                                                                    </div>
+                                                                                    {{--                                                                        <div class="font-size-11">05 min</div>--}}
+                                                                                </div>
+                                                                            </a>
+                                                                        </li>
+                                                                        @php(array_push($unique, $name))
+                                                                    @endif
                                                                 @endforeach
-                                                               @endif
+                                                            @endif
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -169,11 +170,11 @@
                                             <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
                                                 <div class="simplebar-content-wrapper"
                                                      style="height: auto; overflow: hidden;">
-                                                    <div class="simplebar-content" style="padding: 0px;">
+                                                    <div class="simplebar-content" style="padding: 0px;" id="usersGroups">
                                                         @if($groups)
                                                             @foreach($groups as $group)
-                                                        <li>
-                                                            <a onclick="groupMessages('{{$group->group->id}}','{{$group->group->name}}')" >
+                                                        <li id="removeStyleG{{$group->group->id}}">
+                                                            <a id="addStyleG{{$group->group->id}}" onclick="groupMessages('{{$group->group->id}}','{{$group->group->name}}')" >
                                                                 <div class="d-flex align-items-center">
                                                                     <div class="flex-shrink-0 me-3">
                                                                         <div class="avatar-xs">
@@ -497,8 +498,47 @@
 @section('script')
     @include('my_course.articles.script')
     <script>
+function setConverSations(data) {
+    $('#chatData').hide()
+if(data == 'g'){
+    $('#toUserId').val('')
+}else{
+    $('#groupId').val('')
+}
+}
+function getData(){
+
+    $.ajax({
+        url:'{{ route('chat.user.data') }}',
+        data: {toId: $('#toUserId').val(),groupId: $('#groupId').val(),"_token": "{{ csrf_token() }}"},
+        type: 'post',
+        success:function (data) {
+            if(data.success == '1'){
+                $('#chatUserData').html(data.conversation);
+                $('#usersGroups').html(data.groupsChat);
+                if(data.toId > 0 ){
+                    $('#convesationData').html(data.convesationData);
+                }
+                if(data.gId > 0 ){
+                    $('#convesationData').html(data.groupData);
+                }
+            }
+        },
+        error:function () {
+
+        }
+    })
+}
+// setInterval(function(){
+//     getData();
+//     // $( "#app-container" ).load(window.location.href + " #main-dev" )
+//     // $( "#mainUserDataDiv" ).load(window.location.href + " #chatUserData" );
+// }, 10000);
         $('#chatData').hide()
         function openInChatBox(userId,first) {
+           var id =  $('#toUserId').val();
+            $(`#removeStyle${id} a`).css('background-color', '');
+            $('#addStyle'+userId).css('background-color', '#F15925');
            var buttonData = '<button type="submit" onclick="sendMessageToUser()"\n' +
                'class="btn btn-primary btn-rounded chat-send w-md waves-effect waves-light">\n' +
                '<span class="d-none d-sm-inline-block me-2" >Send</span> <i\n' +
@@ -567,7 +607,10 @@
             $('#chatData').show();
             $('#toUserName').html(groupName);
 
+            $(`#removeStyleG${$('#groupId').val()} a`).css('background-color', '');
+            $('#addStyleG'+groupId).css('background-color', '#F15925');
             $('#groupId').val(groupId);
+
             $.ajax({
                 url:'{{ route('group.messages') }}',
                 data: {groupId:groupId,  "_token": "{{ csrf_token() }}"},

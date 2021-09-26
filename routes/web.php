@@ -41,6 +41,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('group/create', [\App\Http\Controllers\ChatController::class, 'createGroup'])->name('create.group');
     Route::post('add/group/messages', [\App\Http\Controllers\ChatController::class, 'addGroupMessages'])->name('add.group.messages');
     Route::post('group/messages', [\App\Http\Controllers\ChatController::class, 'groupMessages'])->name('group.messages');
+    Route::post('get/chat/group', [\App\Http\Controllers\ChatController::class, 'chatGroupData'])->name('chat.group.data');
+    Route::post('get/chat/user', [\App\Http\Controllers\ChatController::class, 'chatUserData'])->name('chat.user.data');
 
     Route::get('article/createNew/{courseId}', [\App\Http\Controllers\ArticleController::class, 'createNew'])->name('article.createNew');
     Route::post('add_to_article', [\App\Http\Controllers\IdeaController::class, 'addToArticle'])->name('idea.add_to_article');

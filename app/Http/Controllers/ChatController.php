@@ -8,6 +8,7 @@ use App\Models\GroupUsers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 
 class ChatController extends Controller
 {
@@ -49,7 +50,6 @@ class ChatController extends Controller
         $convesationData = getConversation(Auth::id(),$request->userId);
         if($convesation){
             return response()->json(['success'=>1,'conversation'=>$convesationData]);
-
         }
     }
 
@@ -142,5 +142,18 @@ class ChatController extends Controller
             return response()->json(['success'=>1,'conversation'=>$convesationData,]);
         }
 
+    }
+    public function chatUserData(Request $request){
+        $chats =  Conversations::with('userFrom','userTo')->where('group_id', '=',null)->where('from',Auth::id())->orWhere('to',Auth::id())
+            ->groupBy(['from','to'])->get();
+       $conversation =  View::make('chat.chatModel.chatUser')->with(['chats'=>$chats])->render();
+//        groupId
+        $groups = GroupUsers::with('group')->where('user_id',Auth::id())->groupBy('group_id')->get();
+        $groupsChat =  View::make('chat.chatModel.chatGroups')->with(['groups'=>$groups])->render();
+
+        $convesationData = getConversation(Auth::id(),$request->toId);
+        $groupData = getGroupMessages($request->groupId);
+            return response()->json(['success'=>1,'conversation'=>$conversation,'groupsChat'=>$groupsChat,'convesationData'=>$convesationData,
+                'toId'=>$request->toId,'groupData'=>$groupData,'gId'=>$request->groupId]);
     }
 }

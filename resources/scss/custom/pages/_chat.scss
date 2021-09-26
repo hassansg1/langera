@@ -1,4 +1,4 @@
-// 
+//
 // Chat.scss
 //
 
@@ -98,7 +98,8 @@
 
 
 .chat-conversation{
-  li{
+
+    li{
     clear: both;
   }
 
@@ -202,7 +203,7 @@
         right: 0;
         bottom: 0;
         font-size: 16px;
-        
+
     @media (max-width: 575.98px) {
       display: none;
     }
