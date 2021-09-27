@@ -18,7 +18,7 @@ class ArticleSource extends Model
         $obj->title = $title;
         $obj->link = $link;
         $obj->document = $document;
-        $obj->document_path = public_path('images') . $document;
+        $obj->document_path = asset('images/') . $document;
         $obj->save();
 
         return $obj;

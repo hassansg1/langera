@@ -16,12 +16,10 @@
                 {!! $article->writing !!}
             </textarea>
         </form>
+        <br>
+        <button type="button" onclick="pdfWriting()" class="btn btn-primary form_step_btn">PDF</button>
+        <button type="button" onclick="exportOutlining()" class="btn btn-primary form_step_btn">Word</button>
     </div>
-</div>
-<br>
-<div style="text-align: right">
-    <button type="button" onclick="pdfWriting()" class="btn btn-primary form_step_btn">PDF</button>
-    <button type="button" onclick="exportOutlining()" class="btn btn-primary form_step_btn">Word</button>
 </div>
 <br>
 <button type="button" class="btn btn-default prev-step form_step_btn">Back</button>

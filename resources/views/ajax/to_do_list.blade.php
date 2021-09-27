@@ -1,40 +1,51 @@
-<form id="add_flash_card_form" method="POST" action="{{ route('flash_card.store') }}">
-    {{ csrf_field() }}
-    <div class="modal-header">
-        <h5 class="modal-title" id="myLargeModalLabel">To Do List</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="modal-header">
+    <h5 class="modal-title" id="myLargeModalLabel">To Do List</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+    <div class="mb-4" id="to_do_list_area">
+        @foreach(\Illuminate\Support\Facades\Auth::user()->toDoList as $toDo)
+            @include('ajax.to_do_list_item',['item' => $toDo])
+        @endforeach
     </div>
-    <div class="modal-body">
-        <div class="mb-4">
-            <div class="form-check form-check-primary mb-3">
-                <input class="form-check-input" type="checkbox" id="formCheckcolor1" checked="">
-                <label class="form-check-label" for="formCheckcolor1">
-                    Call For Interview
-                </label>
-            </div>
-
-        </div>
+    <div class="mb-4">
+        <input type="text" value="" class="form-control" placeholder="Type and press enter to create new"
+               id="new_to_do_list">
     </div>
-</form>
+</div>
 
 <script>
 
-    $(document).ready(function () { // Wait until document is fully parsed
-        $("#add_flash_card_form").on('submit', function (e) {
-            e.preventDefault();
+    function handleToDoClick(cb, id) {
+        $.ajax({
+            type: "POST",
+            url: '{{ route('to_do_list.toggleCheckValue') }}',
+            data: {
+                '_token': '{{ csrf_token() }}',
+                value: cb.checked,
+                id: id
+            },
+            success: function (result) {
+            },
+        });
+    }
+
+    $('#new_to_do_list').keypress(function (event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13') {
             $.ajax({
                 type: "POST",
-                url: '{{ route('flash_card.store') }}',
+                url: '{{ route('to_do_list.store') }}',
                 data: {
                     '_token': '{{ csrf_token() }}',
-                    'topic': $('#topic_field').val(),
-                    'answer': $('#answer_filed').val(),
+                    'title': $('#new_to_do_list').val(),
                 },
                 success: function (result) {
-                    $('#flash_area').append(result.html);
-                    $('.modal').modal('hide');
+                    $('#to_do_list_area').append(result.html);
+                    $('#new_to_do_list').val('');
                 },
             });
-        });
-    })
+        }
+    });
+
 </script>

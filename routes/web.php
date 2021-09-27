@@ -37,6 +37,7 @@ Route::group(['middleware' => ['auth']], function () {
         'chat' => \App\Http\Controllers\ChatController::class,
     ]);
 
+    Route::post('toggleCheckValue', [\App\Http\Controllers\ToDoListController::class, 'toggleCheckValue'])->name('to_do_list.toggleCheckValue');
     Route::post('chat/data', [\App\Http\Controllers\ChatController::class, 'chatData'])->name('chat.chatData');
     Route::post('group/create', [\App\Http\Controllers\ChatController::class, 'createGroup'])->name('create.group');
     Route::post('add/group/messages', [\App\Http\Controllers\ChatController::class, 'addGroupMessages'])->name('add.group.messages');

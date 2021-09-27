@@ -9,27 +9,27 @@
         <div class="mb-4">
             <label class="form-label">Type of Source</label>
 
-            <input type="text" class="form-control" value="adad" name="source_type" id="source_type" required>
+            <input type="text" class="form-control" name="source_type" id="source_type" required>
 
         </div>
 
         <div class="mb-4">
             <label class="form-label">Title</label>
 
-            <textarea class="form-control" name="source_title" id="source_title" rows="6">ada</textarea>
+            <textarea class="form-control" name="source_title" id="source_title" rows="6"></textarea>
 
         </div>
 
         <div class="mb-4">
             <label class="form-label">Link</label>
 
-            <input type="text" class="form-control" value="adad" name="source_link" id="source_link">
+            <input type="text" class="form-control" name="source_link" id="source_link">
 
         </div>
         <div class="mb-4">
-            <label class="form-label">Upload Document <span class=" text-muted">(Work, PDF, Audio)</span></label>
+            <label class="form-label">Upload Document <span class=" text-muted">(Word, PDF, Audio)</span></label>
             <div class="input-group">
-                <input type="file" name="source_file"  class="form-control" id="source_file">
+                <input type="file" name="source_file" accept="application/pdf,application/msword,.mp3,audio/*" class="form-control" id="source_file">
             </div>
         </div>
     </div>

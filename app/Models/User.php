@@ -41,6 +41,11 @@ class User extends Authenticatable
 
     protected $appends = ['name'];
 
+    public function toDoList()
+    {
+        return $this->hasMany(ToDoList::class);
+    }
+
     public function courses()
     {
         return $this->belongsToMany(Course::class);

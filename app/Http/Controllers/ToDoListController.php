@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\FlashCards;
+use App\Models\ToDoList;
 use App\Models\UserIdea;
 use Illuminate\Http\Request;
 
@@ -35,9 +36,9 @@ class ToDoListController extends Controller
      */
     public function store(Request $request)
     {
-        $item = FlashCards::addNew($request->topic, $request->answer);
+        $item = ToDoList::addNew($request->title);
         return response()->json([
-            'html' => view('my_course.flash_cards.item')->with('item', $item)->render()
+            'html' => view('ajax.to_do_list_item')->with('item', $item)->render()
         ]);
     }
 
@@ -86,17 +87,14 @@ class ToDoListController extends Controller
         //
     }
 
-    public function addToArticle(Request $request)
+    public function toggleCheckValue(Request $request)
     {
-        $articleId = $request->article_id;
-        if (!$articleId || $articleId == '')
-            $articleId = Article::create([])->id;
-
-        $article = Article::addUpdate($articleId, $request->id);
+        $item = ToDoList::find($request->id);
+        $item->checked = $request->value == 'true' ? 1 : 0;
+        $item->save();
 
         return response()->json([
-            'status' => true,
-            'article_id' => $article->id,
+            'status' => true
         ]);
     }
 }

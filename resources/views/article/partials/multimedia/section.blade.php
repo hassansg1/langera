@@ -1,9 +1,15 @@
 <div class="col-xl-12">
     <div class="popup-gallery d-flex flex-wrap">
         @foreach($article->files as $file)
+            @if(strpos($file->full_file_path,'.mp4') !== false)
+                <video width="200" controls>
+                    <source src="{{ $file->full_file_path }}" type="video/mp4">
+                    Your browser does not support HTML video.
+                </video>
+            @endif
             <a href="{{ $file->full_file_path }}" title="Image">
                 <div class="img-fluid mr-5">
-                    <img src="{{ $file->full_file_path }}" alt="" width="200">
+                    <img src="{{ $file->full_file_path }}" alt="" width="170">
                 </div>
             </a>
         @endforeach

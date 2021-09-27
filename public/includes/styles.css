@@ -486,6 +486,14 @@ body[data-layout=horizontal] .page-content {
     color: #f15925;
 }
 
+.primary_color {
+    color: #f15925;
+}
+
+.black_color {
+    color: #000000;
+}
+
 .wizard li.active span.round-tab {
     background: #f15925;
     color: #fff;
@@ -740,4 +748,9 @@ label {
 {
     background-color: #f15925;
     border-color: #f15925;
+}
+.chat-conversation
+{
+    height: 500px;
+    overflow: auto;
 }

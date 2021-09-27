@@ -1,4 +1,4 @@
-<ul class="list-unstyled mb-0" data-simplebar="init" style="max-height: 486px;">
+<ul class="list-unstyled mb-0" data-simplebar="init">
     <div class="simplebar-wrapper" style="margin: 0px;">
         <div class="simplebar-height-auto-observer-wrapper">
             <div class="simplebar-height-auto-observer"></div>

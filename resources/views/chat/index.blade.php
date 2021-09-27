@@ -15,7 +15,8 @@
                     <div class="py-4 border-bottom">
                         <div class="d-flex">
                             <div class="flex-shrink-0 align-self-center me-3">
-                                <img src="{{ isset(Auth::user()->avatar) ? asset(Auth::user()->avatar) : asset('/assets/images/users/avatar-1.jpg') }}" class="avatar-xs rounded-circle" alt="">
+                                <img src="{{ isset(Auth::user()->avatar) ? asset(Auth::user()->avatar) : asset('/assets/images/users/avatar-1.jpg') }}"
+                                     class="avatar-xs rounded-circle" alt="">
                             </div>
                             <div class="flex-grow-1">
                                 <h5 class="font-size-15 mb-1">{{ Str::ucfirst(Auth::user()->name) }}</h5>
@@ -33,53 +34,57 @@
                                         @if($users)
                                             @foreach($users as $key => $user)
                                                 @if($user->id != loggedInUserId())
-                                                <a  onclick="openInChatBox('{{$user->id}}','{{$user->first_name}}'+' '+'{{$user->last_name}}')" class="dropdown-item">
-                                                <div class="flex-shrink-0 align-self-center me-3">
-                                                    <img src="  {{ isset($user->avatar) ? asset($user->avatar) : asset('/assets/images/users/avatar-1.jpg') }}" class="avatar-xs rounded-circle" alt="">
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <h5 class="font-size-15 mb-1">{{$user->first_name}} {{$user->last_name}}</h5>
-                                                </div>
-                                                </a>
+                                                    <a onclick="openInChatBox('{{$user->id}}','{{$user->first_name}}'+' '+'{{$user->last_name}}')"
+                                                       class="dropdown-item">
+                                                        <div class="flex-shrink-0 align-self-center me-3">
+                                                            <img src="  {{ isset($user->avatar) ? asset($user->avatar) : asset('/assets/images/users/avatar-1.jpg') }}"
+                                                                 class="avatar-xs rounded-circle" alt="">
+                                                        </div>
+                                                        <div class="flex-grow-1">
+                                                            <h5 class="font-size-15 mb-1">{{$user->first_name}} {{$user->last_name}}</h5>
+                                                        </div>
+                                                    </a>
                                                 @endif
                                             @endforeach
-                                            @endif
-{{--                                        <a class="dropdown-item" href="#">Action</a>--}}
-{{--                                        <a class="dropdown-item" href="#">Another action</a>--}}
-{{--                                        <a class="dropdown-item" href="#">Something else here</a>--}}
+                                        @endif
+                                        {{--                                        <a class="dropdown-item" href="#">Action</a>--}}
+                                        {{--                                        <a class="dropdown-item" href="#">Another action</a>--}}
+                                        {{--                                        <a class="dropdown-item" href="#">Something else here</a>--}}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="search-box chat-search-box py-4">
-                        <div class="position-relative">
-                            <input type="text" class="form-control" placeholder="Search...">
-                            <i class="bx bx-search-alt search-icon"></i>
-                        </div>
-                    </div>
-
+                    {{--<div class="search-box chat-search-box py-4">--}}
+                    {{--<div class="position-relative">--}}
+                    {{--<input type="text" class="form-control" placeholder="Search...">--}}
+                    {{--<i class="bx bx-search-alt search-icon"></i>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    <br>
                     <div class="chat-leftsidebar-nav">
                         <ul class="nav nav-pills nav-justified">
                             <li class="nav-item">
-                                <a href="#chat" data-bs-toggle="tab" aria-expanded="true"  onclick="setConverSations('c')"  class="nav-link active">
+                                <a href="#chat" data-bs-toggle="tab" aria-expanded="true"
+                                   onclick="setConverSations('c')" class="nav-link active">
                                     <i class="bx bx-chat font-size-20 d-sm-none"></i>
                                     <span class="d-none d-sm-block">Chat</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#groups" data-bs-toggle="tab" aria-expanded="false" onclick="setConverSations('g')" class="nav-link">
+                                <a href="#groups" data-bs-toggle="tab" aria-expanded="false"
+                                   onclick="setConverSations('g')" class="nav-link">
                                     <i class="bx bx-group font-size-20 d-sm-none"></i>
                                     <span class="d-none d-sm-block">Groups</span>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="#contacts" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
-                                    <i class="bx bx-book-content font-size-20 d-sm-none"></i>
-                                    <span class="d-none d-sm-block">Contacts</span>
-                                </a>
-                            </li>
+                            {{--<li class="nav-item">--}}
+                            {{--<a href="#contacts" data-bs-toggle="tab" aria-expanded="false" class="nav-link">--}}
+                            {{--<i class="bx bx-book-content font-size-20 d-sm-none"></i>--}}
+                            {{--<span class="d-none d-sm-block">Contacts</span>--}}
+                            {{--</a>--}}
+                            {{--</li>--}}
                         </ul>
                         <div class="tab-content py-4">
                             <div class="tab-pane show active" id="chat">
@@ -94,8 +99,10 @@
                                             <div class="simplebar-mask">
                                                 <div class="simplebar-offset" style="right: -16.8px; bottom: 0px;">
                                                     <div class="simplebar-content-wrapper"
-                                                         style="height: auto; overflow: hidden scroll;"  id="mainUserDataDiv">
-                                                        <div class="simplebar-content" id="chatUserData" style="padding: 0px;" >
+                                                         style="height: auto; overflow: hidden scroll;"
+                                                         id="mainUserDataDiv">
+                                                        <div class="simplebar-content" id="chatUserData"
+                                                             style="padding: 0px;">
                                                             @if($chats)
                                                                 @php($unique= [])
                                                                 @foreach($chats as $chat)
@@ -109,15 +116,19 @@
                                                                         @php($id = $chat->to)
                                                                     @endif
                                                                     @if(in_array($name,$unique) == false)
-                                                                        <li class="active"  id="removeStyle{{$id}}"  onclick="openInChatBox('{{$id}}','{{$name}}')" >
-                                                                            <a  id="addStyle{{$id}}" style="background-color: #f7f9fb" href="javascript: void(0);">
+                                                                        <li class="active" id="removeStyle{{$id}}"
+                                                                            onclick="openInChatBox('{{$id}}','{{$name}}')">
+                                                                            <a class="user_chat_link"
+                                                                               id="addStyle{{$id}}"
+                                                                               style="background-color: #f7f9fb"
+                                                                               href="javascript: void(0);">
                                                                                 <div class="d-flex">
-                                                                                    l                                    <div
-                                                                                        class="flex-shrink-0 align-self-center me-3">
+                                                                                    <div
+                                                                                            class="flex-shrink-0 align-self-center me-3">
                                                                                         <i class="mdi mdi-circle font-size-10"></i>
                                                                                     </div>
                                                                                     <div
-                                                                                        class="flex-shrink-0 align-self-center me-3">
+                                                                                            class="flex-shrink-0 align-self-center me-3">
                                                                                         <img src="{{$avatar}}"
                                                                                              class="rounded-circle avatar-xs"
                                                                                              alt="">
@@ -127,7 +138,8 @@
                                                                                         <h5 class="text-truncate font-size-14 mb-1">
                                                                                             {{$name}}
                                                                                         </h5>
-                                                                                        <p class="text-truncate mb-0">Hey! there I'm
+                                                                                        <p class="text-truncate mb-0">
+                                                                                            Hey! there I'm
                                                                                             available</p>
                                                                                     </div>
                                                                                     {{--                                                                        <div class="font-size-11">05 min</div>--}}
@@ -160,7 +172,11 @@
 
                             <div class="tab-pane" id="groups">
                                 <h5 class="font-size-14 mb-3">Groups</h5>
-                                    <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#myModal">Create new group</button>
+                                <button type="button" class="btn btn-primary waves-effect waves-light"
+                                        data-bs-toggle="modal" data-bs-target="#myModal">Create new group
+                                </button>
+                                <br>
+                                <br>
                                 <ul class="list-unstyled chat-list" data-simplebar="init" style="max-height: 410px;">
                                     <div class="simplebar-wrapper" style="margin: 0px;">
                                         <div class="simplebar-height-auto-observer-wrapper">
@@ -170,29 +186,32 @@
                                             <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
                                                 <div class="simplebar-content-wrapper"
                                                      style="height: auto; overflow: hidden;">
-                                                    <div class="simplebar-content" style="padding: 0px;" id="usersGroups">
+                                                    <div class="simplebar-content" style="padding: 0px;"
+                                                         id="usersGroups">
                                                         @if($groups)
                                                             @foreach($groups as $group)
-                                                        <li id="removeStyleG{{$group->group->id}}">
-                                                            <a id="addStyleG{{$group->group->id}}" onclick="groupMessages('{{$group->group->id}}','{{$group->group->name}}')" >
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="flex-shrink-0 me-3">
-                                                                        <div class="avatar-xs">
+                                                                <li id="removeStyleG{{$group->group->id}}">
+                                                                    <a class="group_chat"
+                                                                       id="addStyleG{{$group->group->id}}"
+                                                                       onclick="groupMessages('{{$group->group->id}}','{{$group->group->name}}')">
+                                                                        <div class="d-flex align-items-center">
+                                                                            <div class="flex-shrink-0 me-3">
+                                                                                <div class="avatar-xs">
                                                                         <span
-                                                                            class="avatar-title rounded-circle bg-primary bg-soft text-primary">
+                                                                                class="avatar-title rounded-circle bg-primary bg-soft text-primary">
                                                                             {{strtoupper($group->group->name[0])}}
                                                                         </span>
-                                                                        </div>
-                                                                    </div>
+                                                                                </div>
+                                                                            </div>
 
-                                                                    <div class="flex-grow-1">
-                                                                        <h5 class="font-size-14 mb-0">{{isset($group->group->name)?$group->group->name:'sdsd'}}</h5>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        </li>
+                                                                            <div class="flex-grow-1">
+                                                                                <h5 class="font-size-14 mb-0">{{isset($group->group->name)?$group->group->name:'sdsd'}}</h5>
+                                                                            </div>
+                                                                        </div>
+                                                                    </a>
+                                                                </li>
                                                             @endforeach
-                                                            @endif
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -226,7 +245,7 @@
                                                         <div>
                                                             <div class="avatar-xs mb-3">
                                                             <span
-                                                                class="avatar-title rounded-circle bg-primary bg-soft text-primary">
+                                                                    class="avatar-title rounded-circle bg-primary bg-soft text-primary">
                                                                 A
                                                             </span>
                                                             </div>
@@ -250,7 +269,7 @@
                                                         <div class="mt-4">
                                                             <div class="avatar-xs mb-3">
                                                             <span
-                                                                class="avatar-title rounded-circle bg-primary bg-soft text-primary">
+                                                                    class="avatar-title rounded-circle bg-primary bg-soft text-primary">
                                                                 B
                                                             </span>
                                                             </div>
@@ -267,7 +286,7 @@
                                                         <div class="mt-4">
                                                             <div class="avatar-xs mb-3">
                                                             <span
-                                                                class="avatar-title rounded-circle bg-primary bg-soft text-primary">
+                                                                    class="avatar-title rounded-circle bg-primary bg-soft text-primary">
                                                                 C
                                                             </span>
                                                             </div>
@@ -292,7 +311,7 @@
                                                         <div class="mt-4">
                                                             <div class="avatar-xs mb-3">
                                                             <span
-                                                                class="avatar-title rounded-circle bg-primary bg-soft text-primary">
+                                                                    class="avatar-title rounded-circle bg-primary bg-soft text-primary">
                                                                 D
                                                             </span>
                                                             </div>
@@ -335,65 +354,65 @@
                         <div class="row">
                             <div class="col-md-4 col-9">
                                 <h5 class="font-size-15 mb-1" id="toUserName"></h5>
-{{--                                <p class="text-muted mb-0"><i class="mdi mdi-circle text-success align-middle me-1"></i>--}}
-{{--                                    Active now</p>--}}
+                                {{--                                <p class="text-muted mb-0"><i class="mdi mdi-circle text-success align-middle me-1"></i>--}}
+                                {{--                                    Active now</p>--}}
                             </div>
                             <div class="col-md-8 col-3">
                                 <ul class="list-inline user-chat-nav text-end mb-0">
                                     <li class="list-inline-item d-none d-sm-inline-block">
                                         <div class="dropdown">
-                                            <button class="btn nav-btn dropdown-toggle" type="button"
-                                                    data-bs-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false">
-                                                <i class="bx bx-search-alt-2"></i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-md">
-                                                <form class="p-3">
-                                                    <div class="form-group m-0">
-                                                        <div class="input-group">
-                                                            <input type="text" class="form-control"
-                                                                   placeholder="Search ..."
-                                                                   aria-label="Recipient's username">
+                                            {{--<button class="btn nav-btn dropdown-toggle" type="button"--}}
+                                                    {{--data-bs-toggle="dropdown" aria-haspopup="true"--}}
+                                                    {{--aria-expanded="false">--}}
+                                                {{--<i class="bx bx-search-alt-2"></i>--}}
+                                            {{--</button>--}}
+                                            {{--<div class="dropdown-menu dropdown-menu-end dropdown-menu-md">--}}
+                                                {{--<form class="p-3">--}}
+                                                    {{--<div class="form-group m-0">--}}
+                                                        {{--<div class="input-group">--}}
+                                                            {{--<input type="text" class="form-control"--}}
+                                                                   {{--placeholder="Search ..."--}}
+                                                                   {{--aria-label="Recipient's username">--}}
 
-                                                            <button class="btn btn-primary" type="submit"><i
-                                                                    class="mdi mdi-magnify"></i></button>
+                                                            {{--<button class="btn btn-primary" type="submit"><i--}}
+                                                                        {{--class="mdi mdi-magnify"></i></button>--}}
 
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
+                                                        {{--</div>--}}
+                                                    {{--</div>--}}
+                                                {{--</form>--}}
+                                            {{--</div>--}}
                                         </div>
                                     </li>
-                                    <li class="list-inline-item  d-none d-sm-inline-block">
-                                        <div class="dropdown">
-                                            <button class="btn nav-btn dropdown-toggle" type="button"
-                                                    data-bs-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false">
-                                                <i class="bx bx-cog"></i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item" href="#">View Profile</a>
-                                                <a class="dropdown-item" href="#">Clear chat</a>
-                                                <a class="dropdown-item" href="#">Muted</a>
-                                                <a class="dropdown-item" href="#">Delete</a>
-                                            </div>
-                                        </div>
-                                    </li>
+                                    {{--<li class="list-inline-item  d-none d-sm-inline-block">--}}
+                                        {{--<div class="dropdown">--}}
+                                            {{--<button class="btn nav-btn dropdown-toggle" type="button"--}}
+                                                    {{--data-bs-toggle="dropdown" aria-haspopup="true"--}}
+                                                    {{--aria-expanded="false">--}}
+                                                {{--<i class="bx bx-cog"></i>--}}
+                                            {{--</button>--}}
+                                            {{--<div class="dropdown-menu dropdown-menu-end">--}}
+                                                {{--<a class="dropdown-item" href="#">View Profile</a>--}}
+                                                {{--<a class="dropdown-item" href="#">Clear chat</a>--}}
+                                                {{--<a class="dropdown-item" href="#">Muted</a>--}}
+                                                {{--<a class="dropdown-item" href="#">Delete</a>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</li>--}}
 
-                                    <li class="list-inline-item">
-                                        <div class="dropdown">
-                                            <button class="btn nav-btn dropdown-toggle" type="button"
-                                                    data-bs-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false">
-                                                <i class="bx bx-dots-horizontal-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <a class="dropdown-item" href="#">Something else</a>
-                                            </div>
-                                        </div>
-                                    </li>
+                                    {{--<li class="list-inline-item">--}}
+                                        {{--<div class="dropdown">--}}
+                                            {{--<button class="btn nav-btn dropdown-toggle" type="button"--}}
+                                                    {{--data-bs-toggle="dropdown" aria-haspopup="true"--}}
+                                                    {{--aria-expanded="false">--}}
+                                                {{--<i class="bx bx-dots-horizontal-rounded"></i>--}}
+                                            {{--</button>--}}
+                                            {{--<div class="dropdown-menu dropdown-menu-end">--}}
+                                                {{--<a class="dropdown-item" href="#">Action</a>--}}
+                                                {{--<a class="dropdown-item" href="#">Another action</a>--}}
+                                                {{--<a class="dropdown-item" href="#">Something else</a>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</li>--}}
 
                                 </ul>
                             </div>
@@ -402,32 +421,32 @@
 
 
                     <div>
-                        <div class="chat-conversation p-3" id="convesationData">
+                        <div class="p-3  chat-conversation" id="convesationData">
 
-{{--                    @php($data = getConversation(loggedInUserId()))--}}
-{{--                            {!! $data !!}--}}
+                            {{--                    @php($data = getConversation(loggedInUserId()))--}}
+                            {{--                            {!! $data !!}--}}
                         </div>
                         <div class="p-3 chat-input-section">
-{{--                            <form enctype="multipart/form-data" action="#">--}}
+                            {{--                            <form enctype="multipart/form-data" action="#">--}}
                             <div class="row">
                                 <div class="col">
                                     <div class="position-relative">
-                                        <input type="text" class="form-control chat-input"
+                                        <input type="text" class="form-control chat-input" data-emojiable="true"
                                                placeholder="Enter Message..." id="messageText">
                                         <div class="chat-input-links" id="tooltip-container">
                                             <ul class="list-inline mb-0">
-                                                <li class="list-inline-item"><a href="javascript: void(0);"
-                                                                                title="Emoji"><i
-                                                            class="mdi mdi-emoticon-happy-outline"></i></a></li>
-                                                <li class="list-inline-item"><a href="javascript: void(0);"
-                                                                                title="Images"><i
-                                                            class="mdi mdi-file-image-outline"></i></a></li>
-                                                <li class="list-inline-item">
-{{--                                                    <input type="file" id="imageData" class="mdi mdi-file-document-outlin">--}}
-                                                    <a href="javascript: void(0);"
-                                                                                title="Add Files"0><i
-                                                            class="mdi mdi-file-document-outline"></i></a>
-                                                </li>
+                                                {{--<li class="list-inline-item"><a href="javascript: void(0);"--}}
+                                                {{--title="Emoji"><i--}}
+                                                {{--class="mdi mdi-emoticon-happy-outline"></i></a></li>--}}
+                                                {{--<li class="list-inline-item"><a href="javascript: void(0);"--}}
+                                                {{--title="Images"><i--}}
+                                                {{--class="mdi mdi-file-image-outline"></i></a></li>--}}
+                                                {{--<li class="list-inline-item">--}}
+                                                {{--                                                    <input type="file" id="imageData" class="mdi mdi-file-document-outlin">--}}
+                                                {{--<a href="javascript: void(0);"--}}
+                                                {{--title="Add Files" 0><i--}}
+                                                {{--class="mdi mdi-file-document-outline"></i></a>--}}
+                                                {{--</li>--}}
                                             </ul>
                                         </div>
                                     </div>
@@ -435,12 +454,12 @@
                                 <div class="col-auto">
                                     <input type="hidden" id="toUserId">
                                     <input type="hidden" id="groupId">
-                                    <div id="submitButton">
+                                    <div id="submitButton" style="line-height: 5">
 
                                     </div>
                                 </div>
                             </div>
-{{--                            </form>--}}
+                            {{--                            </form>--}}
                         </div>
                     </div>
                 </div>
@@ -449,46 +468,51 @@
         </div>
     </div>
     <div>
-        <div id="myModal" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+        <div id="myModal" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" style="display: none;"
+             aria-hidden="true">
             <div class="modal-dialog">
                 <form action="{{route('create.group')}}" method="post" id="addgroupModal">
                     {{csrf_field()}}
 
                     <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="myModalLabel">Create new group</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div>
-                            @if($users)
-                            <div class="flex d-inline-flex" >
-                            @foreach($users as $key => $user)
-                                    @if($user->id != loggedInUserId())
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="myModalLabel">Create new group</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                @if($users)
+                                    <div class="flex d-inline-flex">
+                                        @foreach($users as $key => $user)
+                                            @if($user->id != loggedInUserId())
 
-                                            <div class="flex-shrink-0 align-self-center me-3 ml-6">
-                                                <img src="assets/images/users/avatar-1.jpg" class="avatar-xs rounded-circle" alt="">
-                                            </div>
-                                            <div class="flex">
-                                                <label for="userCheckbox{{$user->id}}">{{$user->first_name}} {{$user->last_name}} </label>
-                                                <input type="checkbox" value="{{$user->id}}" name="groupUser[]" id="userCheckbox{{$user->id}}">
-                                            </div>
-                                    @endif
-                                @endforeach
-                                <input type="hidden" value="{{loggedInUserId()}}" name="groupUser[]" >
+                                                <div class="flex-shrink-0 align-self-center me-3 ml-6">
+                                                    <img src="assets/images/users/avatar-1.jpg"
+                                                         class="avatar-xs rounded-circle" alt="">
+                                                </div>
+                                                <div class="flex">
+                                                    <label for="userCheckbox{{$user->id}}">{{$user->first_name}} {{$user->last_name}} </label>
+                                                    <input type="checkbox" value="{{$user->id}}" name="groupUser[]"
+                                                           id="userCheckbox{{$user->id}}">
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                        <input type="hidden" value="{{loggedInUserId()}}" name="groupUser[]">
+                                    </div>
+                                @endif
                             </div>
-                            @endif
+                            <div class="mt-5">
+                                <label>Group name</label>
+                                <input type="text" name="groupName" required>
+                            </div>
                         </div>
-                        <div class="mt-5">
-                        <label>Group name</label>
-                          <input type="text" name="groupName" required>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close
+                            </button>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">Create new group
+                            </button>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary waves-effect waves-light">Create new group</button>
-                    </div>
-                </div><!-- /.modal-content -->
+                    </div><!-- /.modal-content -->
                 </form>
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
@@ -498,107 +522,131 @@
 @section('script')
     @include('my_course.articles.script')
     <script>
-function setConverSations(data) {
-    $('#chatData').hide()
-if(data == 'g'){
-    $('#toUserId').val('')
-}else{
-    $('#groupId').val('')
-}
-}
-function getData(){
-
-    $.ajax({
-        url:'{{ route('chat.user.data') }}',
-        data: {toId: $('#toUserId').val(),groupId: $('#groupId').val(),"_token": "{{ csrf_token() }}"},
-        type: 'post',
-        success:function (data) {
-            if(data.success == '1'){
-                $('#chatUserData').html(data.conversation);
-                $('#usersGroups').html(data.groupsChat);
-                if(data.toId > 0 ){
-                    $('#convesationData').html(data.convesationData);
-                }
-                if(data.gId > 0 ){
-                    $('#convesationData').html(data.groupData);
+        $('.chat-input').keypress(function (event) {
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if (keycode == '13') {
+                text = $('.chat-input').val();
+                if (text != "") {
+                    $('.chat-send').click();
                 }
             }
-        },
-        error:function () {
+        });
+        $(document).ready(function () {
+            $('.user_chat_link').first().click();
+        });
 
+        function setConverSations(data) {
+            $('#chatData').hide()
+            if (data == 'g') {
+                $('#toUserId').val('')
+                $('.group_chat').first().click();
+            } else {
+                $('.user_chat_link').first().click();
+                $('#groupId').val('')
+            }
         }
-    })
-}
-// setInterval(function(){
-//     getData();
-//     // $( "#app-container" ).load(window.location.href + " #main-dev" )
-//     // $( "#mainUserDataDiv" ).load(window.location.href + " #chatUserData" );
-// }, 10000);
-        $('#chatData').hide()
-        function openInChatBox(userId,first) {
-           var id =  $('#toUserId').val();
-            $(`#removeStyle${id} a`).css('background-color', '');
-            $('#addStyle'+userId).css('background-color', '#F15925');
-           var buttonData = '<button type="submit" onclick="sendMessageToUser()"\n' +
-               'class="btn btn-primary btn-rounded chat-send w-md waves-effect waves-light">\n' +
-               '<span class="d-none d-sm-inline-block me-2" >Send</span> <i\n' +
-               'class="mdi mdi-send"></i></button>'
-            $('#submitButton').html(buttonData);
-            $('#chatData').show();
-        $('#toUserName').html(first);
+
+        function getData() {
+
             $.ajax({
-                url:'{{ route('chat.chatData') }}',
-                data: {userId:userId, "_token": "{{ csrf_token() }}"},
+                url: '{{ route('chat.user.data') }}',
+                data: {toId: $('#toUserId').val(), groupId: $('#groupId').val(), "_token": "{{ csrf_token() }}"},
                 type: 'post',
-                success:function (data) {
-                    if(data.success == '1'){
-                        $('#convesationData').html(data.conversation)
+                success: function (data) {
+                    if (data.success == '1') {
+                        $('#chatUserData').html(data.conversation);
+                        $('#usersGroups').html(data.groupsChat);
+                        if (data.toId > 0) {
+                            $('#convesationData').html(data.convesationData);
+                        }
+                        if (data.gId > 0) {
+                            $('#convesationData').html(data.groupData);
+                        }
                     }
                 },
-                error:function () {
+                error: function () {
 
                 }
             })
-        $('#toUserId').val(userId);
+        }
+
+        // setInterval(function(){
+        //     getData();
+        //     // $( "#app-container" ).load(window.location.href + " #main-dev" )
+        //     // $( "#mainUserDataDiv" ).load(window.location.href + " #chatUserData" );
+        // }, 10000);
+        $('#chatData').hide()
+
+        function openInChatBox(userId, first) {
+            var id = $('#toUserId').val();
+            $(`#removeStyle${id} a`).css('background-color', '');
+            $('#addStyle' + userId).css('background-color', '#f7f2db');
+            var buttonData = '<button type="submit" onclick="sendMessageToUser()"\n' +
+                'class="btn btn-primary btn-rounded chat-send w-md waves-effect waves-light">\n' +
+                '<span class="d-none d-sm-inline-block me-2" >Send</span> <i\n' +
+                'class="mdi mdi-send"></i></button>'
+            $('#submitButton').html(buttonData);
+            $('#chatData').show();
+            $('#toUserName').html(first);
+            $.ajax({
+                url: '{{ route('chat.chatData') }}',
+                data: {userId: userId, "_token": "{{ csrf_token() }}"},
+                type: 'post',
+                success: function (data) {
+                    if (data.success == '1') {
+                        $('#convesationData').html(data.conversation)
+                    }
+                },
+                error: function () {
+
+                }
+            })
+            $('#toUserId').val(userId);
         }
 
         function sendMessageToUser() {
-          var userId=   $('#toUserId').val();
-          var message=   $('#messageText').val();
+            var userId = $('#toUserId').val();
+            var message = $('#messageText').val();
 
-        $.ajax({
-            url:'{{ route('chat.store') }}',
-            data: {userId:userId, message:message, "_token": "{{ csrf_token() }}"},
-            type: 'Post',
-            success:function (data) {
-            if(data.success == '1'){
-            $('#convesationData').html(data.conversation);
-                $('#messageText').val('')
-            }
-            },
-            error:function () {
-
-            }
-        })
-        }
-        function addGroupMessages() {
-            var message=   $('#messageText').val();
             $.ajax({
-                url:'{{ route('add.group.messages') }}',
-                data: {groupId: $('#groupId').val(), message:message, "_token": "{{ csrf_token() }}"},
+                url: '{{ route('chat.store') }}',
+                data: {userId: userId, message: message, "_token": "{{ csrf_token() }}"},
                 type: 'Post',
-                success:function (data) {
-                    if(data.success == '1'){
+                success: function (data) {
+                    if (data.success == '1') {
+                        $('#convesationData').html(data.conversation);
+                        $('#messageText').val('');
+                        $('#convesationData').animate({
+                            scrollTop: $('#convesationData')[0].scrollHeight * 100
+                        }, "fast");
+                        // $('#convesationData').scrollTop(100);
+                    }
+                },
+                error: function () {
+
+                }
+            })
+        }
+
+        function addGroupMessages() {
+            var message = $('#messageText').val();
+            $.ajax({
+                url: '{{ route('add.group.messages') }}',
+                data: {groupId: $('#groupId').val(), message: message, "_token": "{{ csrf_token() }}"},
+                type: 'Post',
+                success: function (data) {
+                    if (data.success == '1') {
                         $('#convesationData').html(data.conversation);
                         $('#messageText').val('')
                     }
                 },
-                error:function () {
+                error: function () {
 
                 }
             })
         }
-        function groupMessages(groupId,groupName) {
+
+        function groupMessages(groupId, groupName) {
             var buttonData = '<button type="submit" onclick="addGroupMessages()"\n' +
                 'class="btn btn-primary btn-rounded chat-send w-md waves-effect waves-light">\n' +
                 '<span class="d-none d-sm-inline-block me-2" >Send</span> <i\n' +
@@ -609,19 +657,19 @@ function getData(){
             $('#toUserName').html(groupName);
 
             $(`#removeStyleG${$('#groupId').val()} a`).css('background-color', '');
-            $('#addStyleG'+groupId).css('background-color', '#F15925');
+            $('#addStyleG' + groupId).css('background-color', '#f7f2db');
             $('#groupId').val(groupId);
 
             $.ajax({
-                url:'{{ route('group.messages') }}',
-                data: {groupId:groupId,  "_token": "{{ csrf_token() }}"},
+                url: '{{ route('group.messages') }}',
+                data: {groupId: groupId, "_token": "{{ csrf_token() }}"},
                 type: 'Post',
-                success:function (data) {
-                    if(data.success == '1'){
+                success: function (data) {
+                    if (data.success == '1') {
                         $('#convesationData').html(data.conversation)
                     }
                 },
-                error:function () {
+                error: function () {
 
                 }
             })
