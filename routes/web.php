@@ -57,5 +57,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('pdfOutlining', [\App\Http\Controllers\AjaxController::class, 'pdfOutlining']);
     Route::post('pdfWriting', [\App\Http\Controllers\AjaxController::class, 'pdfWriting']);
 
+    Route::get('wordOutlining/{id}', [\App\Http\Controllers\AjaxController::class, 'wordOutlining'])->name('wordOutlining');
+
 
 });

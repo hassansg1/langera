@@ -19,7 +19,8 @@
         </form>
         <br>
         <button type="button" onclick="pdfWriting()" class="btn btn-primary form_step_btn">PDF</button>
-        <button type="button" onclick="exportOutlining()" class="btn btn-primary form_step_btn">Word</button>
+        <a href="{{route('wordOutlining',[$article->id])}}"
+                class="btn btn-primary form_step_btn">Word</a>
     </div>
 </div>
 <br>

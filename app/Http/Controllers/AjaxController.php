@@ -86,4 +86,16 @@ class AjaxController extends Controller
         return $pdf->download($fileName . '.pdf');
 
     }
+
+    public function wordOutlining($id){
+        $phpWord = new \PhpOffice\PhpWord\PhpWord();
+        $section = $phpWord->addSection();
+        $text = $section->addText('name');
+        $text = $section->addText('100');
+//        $text = $section->addText($request->get('emp_age'),array('name'=>'Arial','size' => 20,'bold' => true));
+
+        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+        $objWriter->save('Outlining.docx');
+        return response()->download(public_path('Outlining.docx'));
+ }
 }

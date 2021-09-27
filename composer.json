@@ -16,6 +16,7 @@
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
+        "phpoffice/phpword": "^0.18.2",
         "spatie/laravel-google-calendar": "^3.3",
         "spatie/laravel-permission": "^5.1"
     },
