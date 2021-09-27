@@ -37,6 +37,9 @@
                                 {{--                                                            </div>--}}
                                 <div class="ctext-wrap">
                                     <div class="conversation-name">{{$name}} </div>
+                                    @if($value->image)
+                                    <img src="{{asset($value->image)}}" height="50px"  style="border-radius: 5px">
+                                    @endif
                                     <p>
                                         {{$value->message}}
                                     </p>

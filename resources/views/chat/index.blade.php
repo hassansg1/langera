@@ -7,7 +7,27 @@
         @slot('li_1') Dashboards @endslot
         @slot('title') Dashboard @endslot
     @endcomponent
+<style>
+    .wrapper #imageData{
+        display:none;
+    }
 
+    .wrapper label[for='imageData'] *{
+        vertical-align:middle;
+        cursor:pointer;
+    }
+
+    .wrapper label[for='imageData'] span{
+        margin-left: 10px
+    }
+
+    .wrapper i.remove{
+        vertical-align:middle;
+        margin-left: 5px;
+        cursor:pointer;
+        display:none;
+    }
+</style>
     <div class="row pl-27">
         <div class="d-lg-flex">
             <div class="chat-leftsidebar me-lg-4">
@@ -348,7 +368,7 @@
 
                 </div>
             </div>
-            <div class="w-100 user-chat">
+            <div class="w-100 user-chat" style="max-height: 100px">
                 <div class="card" id="chatData">
                     <div class="p-4 border-bottom ">
                         <div class="row">
@@ -427,7 +447,7 @@
                             {{--                            {!! $data !!}--}}
                         </div>
                         <div class="p-3 chat-input-section">
-                            {{--                            <form enctype="multipart/form-data" action="#">--}}
+{{--                                                        <form enctype="multipart/form-data" action="#">--}}
                             <div class="row">
                                 <div class="col">
                                     <div class="position-relative">
@@ -441,12 +461,20 @@
                                                 {{--<li class="list-inline-item"><a href="javascript: void(0);"--}}
                                                 {{--title="Images"><i--}}
                                                 {{--class="mdi mdi-file-image-outline"></i></a></li>--}}
-                                                {{--<li class="list-inline-item">--}}
-                                                {{--                                                    <input type="file" id="imageData" class="mdi mdi-file-document-outlin">--}}
-                                                {{--<a href="javascript: void(0);"--}}
-                                                {{--title="Add Files" 0><i--}}
-                                                {{--class="mdi mdi-file-document-outline"></i></a>--}}
-                                                {{--</li>--}}
+                                                <li class="list-inline-item  wrapper">
+                                                    <a href="#">
+                                                    <input type="file" id="imageData">
+                                                    <label for="imageData">
+                                                        <i class="mdi mdi-file-document-outline"></i>
+                                                        <span></span>
+                                                    </label>
+                                                    <i class="fa fa-times-circle remove"></i>
+                                                    </a>
+{{--                                                <a href="javascript: void(0);"--}}
+{{--                                                title="Add Files" 0>--}}
+{{--                                                    <i--}}
+{{--                                                class="mdi mdi-file-document-outline"></i></a>--}}
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -459,7 +487,7 @@
                                     </div>
                                 </div>
                             </div>
-                            {{--                            </form>--}}
+{{--                                                        </form>--}}
                         </div>
                     </div>
                 </div>
@@ -604,13 +632,22 @@
             $('#toUserId').val(userId);
         }
 
-        function sendMessageToUser() {
+        function sendMessageToUser(evt) {
             var userId = $('#toUserId').val();
             var message = $('#messageText').val();
-
-            $.ajax({
+            var fd = new FormData();
+            var files = $('#imageData')[0].files;
+            if(files.length > 0 ) {
+                fd.append('file', files[0]);
+             }
+            fd.append('userId', userId);
+            fd.append('message', message);
+            fd.append('_token', "{{ csrf_token() }}");
+        $.ajax({
                 url: '{{ route('chat.store') }}',
-                data: {userId: userId, message: message, "_token": "{{ csrf_token() }}"},
+                contentType: false,
+                processData: false,
+                data: fd,
                 type: 'Post',
                 success: function (data) {
                     if (data.success == '1') {
@@ -630,11 +667,23 @@
 
         function addGroupMessages() {
             var message = $('#messageText').val();
+            var groupId = $('#groupId').val();
+            var fd = new FormData();
+            var files = $('#imageData')[0].files;
+            if(files.length > 0 ) {
+                fd.append('file', files[0]);
+            }
+            fd.append('groupId', groupId);
+            fd.append('message', message);
+            fd.append('_token', "{{ csrf_token() }}");
             $.ajax({
                 url: '{{ route('add.group.messages') }}',
-                data: {groupId: $('#groupId').val(), message: message, "_token": "{{ csrf_token() }}"},
+                contentType: false,
+                processData: false,
+                data: fd,
                 type: 'Post',
                 success: function (data) {
+                    console.log(data);
                     if (data.success == '1') {
                         $('#convesationData').html(data.conversation);
                         $('#messageText').val('')
@@ -675,4 +724,37 @@
             })
         }
     </script>
+
+    <script  >
+        $('document').ready(function () {
+
+            var $file = $('#imageData'),
+                $label = $file.next('label'),
+                $labelText = $label.find('span'),
+                $labelRemove = $('i.remove'),
+                labelDefault = $labelText.text();
+
+            // on file change
+            // $file.on('change', function (event) {
+            //     var fileName = $file.val().split('\\').pop();
+            //     if (fileName) {
+            //         console.log($file);
+            //         $labelText.text(fileName);
+            //         $labelRemove.show();
+            //     } else {
+            //         $labelText.text(labelDefault);
+            //         $labelRemove.hide();
+            //     }
+            // });
+            //
+            // // Remove file
+            // $labelRemove.on('click', function (event) {
+            //     $file.val("");
+            //     $labelText.text(labelDefault);
+            //     $labelRemove.hide();
+            //     console.log($file);
+            // });
+        });
+    //# sourceURL=pen.js
+</script>
 @endsection

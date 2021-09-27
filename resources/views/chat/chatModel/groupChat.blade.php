@@ -14,6 +14,9 @@
                                         <div class="conversation-list">
                                             <div class="ctext-wrap">
                                                 <div class="conversation-name">{{isset($value->userFrom->first_name)?$value->userFrom->first_name:''}} {{isset($value->userFrom->last_name)?$value->userFrom->last_name:''}} </div>
+                                                @if($value->image)
+                                                    <img src="{{asset($value->image)}}" height="50px"  style="border-radius: 5px">
+                                                @endif
                                                 <p>
                                                     {{$value->message}}
                                                 </p>

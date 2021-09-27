@@ -145,8 +145,8 @@ function userChat (){
 
     $chats =  Conversations::with('userFrom','userTo')->where('group_id', '=',null)->where('from',Auth::id())->orWhere('to',Auth::id())
         ->groupBy(['from','to'])->get();
-    return \Illuminate\Support\Facades\View::make('chat.chatModel.chatUser')->with(['chats'=>$chats])->render();
-
+//    return \Illuminate\Support\Facades\View::make('chat.chatModel.chatUser')->with(['chats'=>$chats])->render();
+return $chats;
 }
 function chatGroups(){
     $groups = GroupUsers::with('group')->where('user_id',Auth::id())->groupBy('group_id')->get();

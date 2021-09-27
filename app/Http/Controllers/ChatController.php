@@ -42,10 +42,18 @@ class ChatController extends Controller
      */
     public function store(Request $request)
     {
+
         $convesation = new Conversations();
         $convesation->from = Auth::id();
         $convesation->to = $request->userId;
         $convesation->message = $request->message;
+        if ($request->file('file')) {
+            $avatar = $request->file('file');
+            $avatarName = time() . '.' . $avatar->getClientOriginalExtension();
+            $avatarPath = public_path('/images/chat/');
+            $avatar->move($avatarPath, $avatarName);
+            $convesation->image = '/images/chat/' . $avatarName;
+        }
         $convesation->save();
         $convesationData = getConversation(Auth::id(),$request->userId);
         if($convesation){
@@ -124,11 +132,17 @@ class ChatController extends Controller
         return redirect()->back()->with(['error'=>'Something went wrong']);
     }
     public function addGroupMessages(Request $request){
-
         $convesation = new Conversations();
         $convesation->from = Auth::id();
         $convesation->group_id = $request->groupId;
         $convesation->message = $request->message;
+        if ($request->file('file')) {
+            $avatar = $request->file('file');
+            $avatarName = time() . '.' . $avatar->getClientOriginalExtension();
+            $avatarPath = public_path('/images/groups/');
+            $avatar->move($avatarPath, $avatarName);
+            $convesation->image = '/images/groups/' . $avatarName;
+        }
         $convesation->save();
         $convesationData =   getGroupMessages($request->groupId);
         if($convesation){
