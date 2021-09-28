@@ -172,6 +172,8 @@ return [
   "Settings" => "Settings",
   "Lock_screen" => "Lock screen",
   "Logout" => "Logout",
+  "Articles" => "Articles",
+  "FlashCard" => "FlashCard",
   "Edit_Details" => "Edit Details"
 ];
 

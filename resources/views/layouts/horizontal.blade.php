@@ -39,13 +39,29 @@
                 </div>
             </div>
         </div>
-
         <div class="d-flex">
 
+
+            <div class="dropdown d-inline-block">
             <button type="button" class="btn btn-sm px-3 font-size-23 header-item waves-effect waves-light"
-                    data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                    data-bs-target="#topnav-menu-content">
                 <i class="bx bx-pencil"></i>
             </button>
+            <div class="dropdown-menu dropdown-menu-end">
+                <!-- item-->
+                <a class="dropdown-item d-block" href="#" data-bs-toggle="modal" data-bs-target=".update-profile"> <span
+                        key="t-profile"><strong>@lang('translation.Articles')</strong></span>
+                </a>
+                @foreach(getUserCourses() as $course)
+                    <li><a class="dropdown-item d-block"
+                       href="{{ url('myCourse/'.$course->id) }}">{{ $course->name }}</a></li>
+                @endforeach
+                    <a class="dropdown-item d-block" href="#" data-bs-toggle="modal"
+                   data-bs-target=".change-password">
+                    <span key="t-settings">@lang('translation.FlashCard')</span></a>
+            </div>
+            </div>
             <button onclick="location.href='{{ route('chat.index') }}'" style="font-size: 24px !important;"
                     type="button" class="btn btn-sm px-3 font-size-23 header-item waves-effect waves-light"
                     data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
