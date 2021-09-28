@@ -90,20 +90,24 @@ class AjaxController extends Controller
 
     }
 
-    public function wordOutlining(Request $request){
+    public function wordOutlining(Request $request)
+    {
         $phpWord = new \PhpOffice\PhpWord\PhpWord();
         $section = $phpWord->addSection();
         $article = Article::find($request->article_id);;
         $content = $article->writing;
 
-        $data =  View::make('word.word')->with(['content'=>$content])->render();
+        $data = View::make('word.word')->with(['content' => $content])->render();
         $doc = new \DOMDocument();
         $doc->loadHTML($data);
-        Html::addHtml($section, $doc->saveXML() , true);
+        Html::addHtml($section, $doc->saveXML(), true);
         $objWriter = IOFactory::createWriter($phpWord, 'Word2007');
-        $file_name = 'Outlining' .  '-' . now()->toDateString() . '.doc';
-        $objWriter->save(public_path($file_name));
-        return response()->download(public_path($file_name));
+        $file_name = 'Outlining' . '-' . now()->toDateString() . '.doc';
+        $name = 'word/' . $file_name;
+        $objWriter->save(public_path($name));
+        return response()->json([
+            'path' => $file_name
+        ]);
 
- }
+    }
 }

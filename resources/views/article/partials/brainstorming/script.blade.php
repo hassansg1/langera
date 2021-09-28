@@ -42,8 +42,7 @@
         });
     }
 
-    function exportOutlining()
-    {
+    function exportOutlining() {
         let articleId = $('#article_id').val();
         $.ajax({
             type: "POST",
@@ -56,8 +55,10 @@
             },
         });
     }
-    function exportOutliningWord()
-    {
+
+    let public_path = '{{ asset('word') }}';
+
+    function exportOutliningWord() {
         let articleId = $('#article_id').val();
         $.ajax({
             type: "POST",
@@ -67,11 +68,12 @@
                 'article_id': articleId
             },
             success: function (result) {
+                window.open(public_path + '/' + result.path, '_blank');
             },
         });
     }
-    function pdfWriting()
-    {
+
+    function pdfWriting() {
         let articleId = $('#article_id').val();
         $.ajax({
             type: "POST",
