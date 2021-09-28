@@ -59,7 +59,7 @@
                 @endforeach
                     <a class="dropdown-item d-block" href="#" data-bs-toggle="modal"
                    data-bs-target=".change-password">
-                    <span key="t-settings">@lang('translation.FlashCard')</span></a>
+                        <span key="t-settings"><strong>@lang('translation.FlashCard')</strong></span></a>
             </div>
             </div>
             <button onclick="location.href='{{ route('chat.index') }}'" style="font-size: 24px !important;"
