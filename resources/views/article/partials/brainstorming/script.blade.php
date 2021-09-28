@@ -56,6 +56,20 @@
             },
         });
     }
+    function exportOutliningWord()
+    {
+        let articleId = $('#article_id').val();
+        $.ajax({
+            type: "POST",
+            url: '{{ url('wordOutlining') }}',
+            data: {
+                '_token': '{{ csrf_token() }}',
+                'article_id': articleId
+            },
+            success: function (result) {
+            },
+        });
+    }
     function pdfWriting()
     {
         let articleId = $('#article_id').val();

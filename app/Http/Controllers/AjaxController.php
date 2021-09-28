@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
+use PhpOffice\PhpWord\Shared\Html;
+use PhpOffice\PhpWord\IOFactory;
 
 class AjaxController extends Controller
 {
@@ -87,15 +90,20 @@ class AjaxController extends Controller
 
     }
 
-    public function wordOutlining($id){
+    public function wordOutlining(Request $request){
         $phpWord = new \PhpOffice\PhpWord\PhpWord();
         $section = $phpWord->addSection();
-        $text = $section->addText('name');
-        $text = $section->addText('100');
-//        $text = $section->addText($request->get('emp_age'),array('name'=>'Arial','size' => 20,'bold' => true));
+        $article = Article::find($request->article_id);;
+        $content = $article->writing;
 
-        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
-        $objWriter->save('Outlining.docx');
-        return response()->download(public_path('Outlining.docx'));
+        $data =  View::make('word.word')->with(['content'=>$content])->render();
+        $doc = new \DOMDocument();
+        $doc->loadHTML($data);
+        Html::addHtml($section, $doc->saveXML() , true);
+        $objWriter = IOFactory::createWriter($phpWord, 'Word2007');
+        $file_name = 'Outlining' .  '-' . now()->toDateString() . '.doc';
+        $objWriter->save(public_path($file_name));
+        return response()->download(public_path($file_name));
+
  }
 }

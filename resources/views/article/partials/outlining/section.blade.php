@@ -19,8 +19,10 @@
         </form>
         <br>
         <button type="button" onclick="pdfWriting()" class="btn btn-primary form_step_btn">PDF</button>
-        <a href="{{route('wordOutlining',[$article->id])}}"
-                class="btn btn-primary form_step_btn">Word</a>
+        <button type="button" onclick="exportOutliningWord()" class="btn btn-primary form_step_btn">Word</button>
+
+{{--        <a href="{{route('wordOutlining',[$article->id])}}"--}}
+{{--                class="btn btn-primary form_step_btn">Word</a>--}}
     </div>
 </div>
 <br>
