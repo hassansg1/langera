@@ -129,6 +129,10 @@ function getUserCourses()
 {
     return \Illuminate\Support\Facades\Auth::user()->courses;
 }
+function getUserFlashCards()
+{
+    return \Illuminate\Support\Facades\Auth::user()->flashCards;
+}
 
 function getConversation($from,$to){
    $chat = \App\Models\Conversations::with('userTo','userFrom')->whereNull('group_id')->where(['from'=>$from , 'to'=>$to])

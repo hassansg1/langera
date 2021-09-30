@@ -50,16 +50,20 @@
             </button>
             <div class="dropdown-menu dropdown-menu-end">
                 <!-- item-->
-                <a class="dropdown-item d-block" href="#" data-bs-toggle="modal" data-bs-target=".update-profile"> <span
+                <a class="dropdown-item d-block" href="#" > <span
                         key="t-profile"><strong>@lang('translation.Articles')</strong></span>
                 </a>
                 @foreach(getUserCourses() as $course)
                     <li><a class="dropdown-item d-block"
                        href="{{ url('myCourse/'.$course->id) }}">{{ $course->name }}</a></li>
                 @endforeach
-                    <a class="dropdown-item d-block" href="#" data-bs-toggle="modal"
-                   data-bs-target=".change-password">
-                        <span key="t-settings"><strong>@lang('translation.FlashCard')</strong></span></a>
+                <a class="dropdown-item d-block" href="#" > <span
+                        key="t-profile"><strong>@lang('translation.FlashCard')</strong></span>
+                </a>
+                @foreach(getUserFlashCards() as $course)
+                    <li><a class="dropdown-item d-block"
+                           href="{{ url('myCourse/'.$course->id) }}">{{ $course->name }}</a></li>
+                @endforeach
             </div>
             </div>
             <button onclick="location.href='{{ route('chat.index') }}'" style="font-size: 24px !important;"
