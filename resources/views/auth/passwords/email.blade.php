@@ -96,12 +96,10 @@
                                         </a>
                                     </div>
                                     <div class="my-auto">
-
                                         <div>
                                             <h5 class="text-primary"> Reset Password</h5>
                                             <p class="text-muted">Re-Password with Skote.</p>
                                         </div>
-
                                         <div class="mt-4">
                                             @if (session('status'))
                                                 <div class="alert alert-success text-center mb-4" role="alert">

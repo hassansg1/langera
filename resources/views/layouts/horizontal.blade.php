@@ -3,7 +3,7 @@
         <div class="d-flex">
             <!-- LOGO -->
             <div class="navbar-brand-box" style="padding-top: 10px">
-                <a href="index" class="logo logo-light">
+                <a href="{{ url('/') }}" class="logo logo-light">
                     <span class="logo-sm">
                         <img src="{{ asset('/images/logo.png') }}" alt="" height="22">
                     </span>

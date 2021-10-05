@@ -30,13 +30,13 @@
                         <div>
                             <div class="col-md-2 flash_card right_card">
                                 <div style="border-left: 1px solid #DEE4EE" class="mt-3 mb-3">
-                                    <h3 class="">8</h3>
+                                    <h3 class="">{{getUserCourses()->count()}}</h3>
                                     <p class="text-muted mb-0 ">Articles</p>
                                 </div>
                             </div>
                             <div class="col-md-2 flash_card left_card">
                                 <div class="mt-3 mb-3">
-                                    <h3 class="">14</h3>
+                                    <h3 class="">{{getUserFlashCards()->count()}}</h3>
                                     <p class="text-muted mb-0 ">Flashcards</p>
                                 </div>
                             </div>
