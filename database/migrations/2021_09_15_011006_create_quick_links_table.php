@@ -13,10 +13,11 @@ class CreateQuickLinksTable extends Migration
      */
     public function up()
     {
-        Schema::create('course_user', function (Blueprint $table) {
+        Schema::create('quick_links', function (Blueprint $table) {
             $table->id();
-            $table->integer('course_id')->nullable();
-            $table->integer('user_id')->nullable();
+            $table->integer('user_id');
+            $table->text('title')->nullable();
+            $table->text('link')->nullable();
             $table->timestamps();
         });
     }

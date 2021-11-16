@@ -41,6 +41,7 @@ class DatabaseSeeder extends Seeder
                 "password" => Hash::make("123456789"),
             ]);
 
+        Role::create(['name' => 'Student','guard_name' => 'web']);
         $user->assignRole("Student");
 
     }
