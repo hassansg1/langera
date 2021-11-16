@@ -2,7 +2,7 @@
     <div class="card bradius_20 p-13" style="background-color: #E5E4F8 !important;">
         <div class="card-body">
             <div class="course_card ">
-                <img class="course_card_icon" src="{{ asset('images/feature_writing.png') }}" alt="">
+                <img class="course_card_icon" src="{{ asset('assets/images/feature_writing.png') }}" alt="">
             </div>
             <br>
             <div class="">

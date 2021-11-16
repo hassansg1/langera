@@ -18,7 +18,7 @@
         @endif
         @if($item->document != "")
             <div class="one_line_break">
-                <a href="{{ asset('images/'.$item->document) }}" target="_blank"
+                <a href="{{ asset('assets/images/'.$item->document) }}" target="_blank"
                    class="font-weight-400 line_height_32 black_color">
                     {{ $item->document }}
                 </a>

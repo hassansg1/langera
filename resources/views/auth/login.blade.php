@@ -96,8 +96,8 @@
                             <div class="w-100">
                                 <div class="bg-overlay"></div>
                                 <div class="d-flex h-100 flex-column">
-                                    <img class="logo_img_login img-responsive" src="{{ asset('images/logo.png') }}">
-                                    <img class="bg_img_login img-responsive" src="{{ asset('images/login_bg.png') }}">
+                                    <img class="logo_img_login img-responsive" src="{{ asset('assets/images/logo.png') }}">
+                                    <img class="bg_img_login img-responsive" src="{{ asset('assets/images/login_bg.png') }}">
                                 </div>
                             </div>
                         </div>
